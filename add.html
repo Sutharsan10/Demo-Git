@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<script type="text/javascript">
+
+function phonenumber(inputmob,inputpin)
+{
+  var phoneno = /^\d{10}$/;
+  var pincode = /^\d{6}$/;
+  if(inputmob.value.match(phoneno))
+  {
+	 
+      return true;
+	  
+  }
+  else
+  {
+	 var confirmation = confirm("!!!Phone number is invalid ")
+	 if(confirmation){
+    // alert("Not a valid Phone Number");
+     return true;
+	  }
+	 else{
+		 return document.myform1.mobile;
+	 }
+  }
+  if(inputpin.value.match(pincode))
+  {
+	 
+      return true;
+	  
+  }
+  else
+  {
+	 var confirmation = confirm("!!!Pincode is invalid are you continue with this number!!!")
+	 if(confirmation){
+    // alert("Not a valid Phone Number");
+     return true;
+	  }
+	 else{
+		 return phonenumber(document.myform1.mobile);
+	 }
+  }
+  }
+
+</script>
+
+<meta charset="ISO-8859-1">
+<title>Home</title>
+</head>
+<body style="background-color:	hotpink;"   >
+ <form name="myform1" action="serve" method="post">
+ <input type="hidden" name="htmlFormName" value="myForm3"/>
+  <center>
+    <table style="padding-top:120px">
+       <tr>
+         <td>ID:</td>
+         <td> <input type="number" required="please enter the id" name="id" > </td>
+        </tr> 
+        <tr>
+         <td>First Name:</td>
+         <td> <input type="text" name="fname" > </td>
+        </tr> 
+        <tr>
+         <td>last Name:</td>
+         <td> <input type="text" name="lname" > </td>
+        </tr> 
+       <tr>
+         <td>Mobile No:</td>
+         <td> <input type="number" name="mobile" > </td>
+       </tr> 
+      <tr>
+         <td>Address:</td>
+         <td> <input type="text" name="add" > </td>
+        </tr> 
+        <tr>
+         <td>PINCODE:</td>
+         <td> <input type="number" name="pin" > </td>
+        </tr>
+        
+        <tr>
+         <td></td>
+         <td><input style="background-color:#778899" type="submit" value="SUBMIT" onclick="phonenumber(document.myform1.mobile , document.myform1.pin)"> </td>
+       </tr>
+                    
+    </table>   
+  </center>
+ </form>
+        <button class="button" name="HButton" onclick="window.location='UI.jsp';" style="margin-left:587px;background-color:#778899">
+      			GO TO HOME
+   		</button>
+ 
+</body>
+</html>

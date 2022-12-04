@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        form{
+           
+            padding: 30px ;
+            float: right;
+        }
+        input{
+            background-color: rgb(101, 232, 141);
+        }
+
+    </style>
+
+</head>
+<body>
+    <form action="serve" method="post">
+        <input type="hidden" name="htmlFormName" value="sort"/>
+            <label>Sort By : </label>
+            <select name="sortType" id="">
+                <option value="">----Select here----</option>
+                <option value="ID" name="id" >By ID</option>
+                <option value="FIRSTNAME" name="name" >By Name</option> 
+            </select>   <br><br>
+           <center> <input type="submit" value="SORT"> </center>
+        </form> 
+ 
+   
+
+    
+
+
+</body>
+</html>

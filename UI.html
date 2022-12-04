@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+
+<html>
+     
+     <head>
+	
+
+      <style>
+.body{
+background-image: url(https://www.w3schools.com/Css/img_flwr.gif), url(https://www.w3schools.com/Css/paper.gif);
+  background-position: right bottom, left top;
+  background-repeat: no-repeat, repeat;
+  padding: 15px;
+}
+           .div1
+           {
+            display:inline;
+            position:relative;
+            top:15px;
+			
+           
+           }
+          .div2
+          {
+            display:inline;
+            position:relative;
+            top: 15px
+			
+          }
+		  .Searchbutton{
+			background-color:rgb(202, 237, 226) ;
+		
+			float: left;
+		  }
+          .button:hover
+          {
+            background-color:#1F618D ;
+            color:white;
+          }
+		  .sort{
+			tab-size: 10px;
+		  }
+		  .TextArea{
+			float: left;
+		  }
+		  
+          
+      table { 
+             
+             border:2px solid black;
+             border-radius:3px;
+             padding:15px;
+             margin-top:45px;
+         	 border-collapse: separate;
+     		 border-spacing:  0 1em;
+   		     background-color:#ADD8E6
+   		   	  }
+   		   	  tr:nth-child(even) 
+   		   	  {background-color: #f2f2f2;}
+   		   	  textarea 
+   		   	  { 
+   		   	    border:1.5px solid black;
+   		   	    background-color:#20B2AA;
+				
+   		   	    border-radius:3px;
+ 				vertical-align: top;
+ 				margin-top:55px;
+ 				margin-left:235px;
+ 				resize:none;
+ 				
+ 				
+ 			  }
+          
+           th
+             { 
+               padding-left:45px;
+               
+             }
+        	 td
+        	{
+         	   text-align:center
+        	}
+
+			button
+        	{
+        	  position:relative;
+			    top: 40px;
+   				left:450px;			    
+        	}
+			
+			
+			.Addbutton
+        	{
+        	   background-color: rgb(24, 162, 24)
+        	}
+			.Upbutton
+        	{
+        	   background-color:rgb(17, 157, 238)
+        	}
+			.Delbutton
+        	{
+        	   background-color:red
+        	}
+
+        	
+        </style>
+    </head>
+	<header><center><h1>Customer Details</h1></center></header>
+
+    <body class="body" onload="getAll()">
+        <form name="myform1" action="serve" method="post" id="FM">
+        <input type="hidden" name="htmlFormName" value="myForm1"/>
+     <div class=div1>
+        <span style="padding:25px">ID: <input style="background-color:#ECF0F1" type="text" name="id"></span>
+        <span style="padding:15px">FIRST NAME: <input style="background-color:#ECF0F1" type="text" name="fname"></span>
+        <span style="padding:15px">LAST NAME: <input style="background-color:#ECF0F1" type="text" name="lname"></span>
+		<button class="Searchbutton" name="SButton"  style="margin-left:25px" onclick="document.getElementById('FM').submit();">
+			SEARCH
+        </button>
+		
+     </div> <br>
+
+	 
+     <!-- <div class="div2" style="display:inline">
+ 	    
+	</div> <br><br> -->
+	
+	</form>
+	
+		
+		
+	<div>
+		<center><textarea class="TextArea" disabled rows="2" cols="101" id="TA" style="color:black;font-size:15px">
+		 <%   
+	         Customer jso=(Customer)request.getAttribute("cus");
+		        if(jso==null)
+		        {%>                PLEASE ENTER VALID ID<%}
+		        	
+		        else
+	            {%>
+	            	
+  ID:<%=jso.getID()%> Firstname:<%=jso.getFirstname()%> LastName:<%=jso.getLastname()%> Mobile:<%=jso.getMobile()%> Address:<%=jso.getAddress()%> Pincode:<%=jso.getPincode()%>
+   	
+	           <%}
+	            
+	          %>
+	          </textarea></center>
+	</div> <br><br><br><br><br><br>
+
+	<div class="sort">
+		<form class="sort" action="serve" method="post">
+		   <input type="hidden" name="htmlFormName" value="sort"/>
+			   <label>Sort By : </label>
+			   <select name="sortType" id="">
+				   <option value="">----Select here----</option>
+				   <option value="ID" name="id" >By ID</option>
+				   <option value="FIRSTNAME" name="name" >By Name</option> 
+			   </select>   
+			   <input type="submit" value="SORT">
+		   </form>
+	   </div> 
+
+
+	<div>
+	  <center><textarea name="" id="" cols="100" rows="20">
+	    <form name="innerform"  method="post" id="IF" onsubmit="myfun()">
+	      <table  class="table" id="customerlist">
+	         <thead>
+	            <tr>
+		            <th>ID</th>
+		            <th>FIRST NAME</th>
+		            <th>LAST NAME</th>
+		            <th>MOBILE</th>
+		            <th>ADDRESS</th>
+		            <th>PIN</th>     
+        		  </tr>
+	         </thead>
+	         <tbody>
+	         <%
+	           
+	         List<Customer> myList =(ArrayList<Customer>)request.getAttribute("customers");
+	     // for loop Custer List
+	     if(myList!=null){
+	     for (int i = 0; i < myList.size(); i++) {
+ 
+            // Print all elements of List
+            Customer cust = (myList.get(i));
+            System.out.println(cust.toString());
+            JSONObject json=new JSONObject();
+            json.put("id",cust.getID());
+            json.put("fname",cust.getFirstname());
+            json.put("lname",cust.getLastname());
+            json.put("mob",cust.getMobile());
+            json.put("add",cust.getAddress());
+            json.put("pin",cust.getPincode());
+            
+            
+            {%>
+        	<tr>
+        	  <td><%=cust.getID()%></td>
+        	  <td><%=cust.getFirstname()%></td>
+        	  <td><%=cust.getLastname()%></td>
+        	  <td><%=cust.getMobile()%></td>
+        	  <td><%=cust.getAddress()%></td>
+        	  <td><%=cust.getPincode()%></td>
+        	 <td>
+				<input type="radio" name="idradio"  value='<%=json.toJSONString()%>' id="<%=cust.getID()%>"onclick="setActiveId(this)"/>
+			</td>
+        	
+        	</tr>
+
+       <%}
+           }//End for loop
+	     } // End of If 
+	         
+	          %>
+	          
+	         </tbody>
+	      
+	      </table>
+	      </form>
+		</textarea>
+	  </center>
+	</div>
+    <button class="Addbutton" name="AButton" onclick="window.location='Add.jsp';" style="margin-left:25px">
+       			ADD REC
+    </button>
+    <button class="Upbutton" name="UButton" onclick="goToUpdate()" style="margin-left:25px">
+       			UPDATE
+   	</button>
+   	<button class="Delbutton" name="DButton" onclick="goToDelete()" style="margin-left:25px;">
+      			DELETE
+   	</button> 
+   	
+   	<form name="myform4" >
+   	 <input type="hidden" name="htmlFormName" value="myForm4"/>	
+    </form>
+    
+    </body>
+  
+
+</html>

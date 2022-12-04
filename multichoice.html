@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Document</title>
+</head>
+<body>
+    java : <input type="checkbox" id="java"> <br> <br>
+    JDBC :  <input type="checkbox" id="JDBC"> <br> <br>
+    servlet : <input type="checkbox" id="servlet"> <br> <br>
+    <input type="button" value="submit" onclick="checkedcheckbox()">
+
+    <script>
+        function checkedcheckbox(){
+        var inputs = document.getElementsByTagName('input');
+        var selected = [];
+			console.log("length"+inputs.length)
+			for(var i=0; i<inputs.length; i++){
+               
+				if(inputs[i].checked){
+                    console.log("checked" + inputs[i].checked)
+					
+					selected.push(inputs[i]);
+                    console.log(inputs[i].id)
+				}
+			}
+            console.log(selected);
+			return selected.length > 0 ? selected : null;
+		}
+        
+    
+    </script>
+
+</body>
+</html>
